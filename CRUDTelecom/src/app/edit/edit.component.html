@@ -1,0 +1,137 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6" style="margin:auto; padding-top: 20px; padding-bottom: 20px;">
+            <h2 class="text-center">Editar Employee</h2>
+            <form [formGroup]="addForm" novalidate class="form">
+                <div class="form-group">
+                    <input type="hidden" formControlName="id" placeholder="Employee Id" name="eId" class="form-control" >
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!--Input Nombre-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="nombre" style="font-size: 14px; color: cadetblue;">Nombre: </label>
+                            <input type="text" formControlName="nombre" placeholder="Nombre (s) del trabajador" name="nombre" class="form-control" >
+                        </div>
+                        <!--Alerta Nombre Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('nombre').hasError('required') && addForm.get('nombre').touched">
+                            <span class="f-12">Inserta el nombre del empleado</span>
+                        </div>
+                        <!--Alerta Nombre MaxLength-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('nombre').hasError('maxlength') && addForm.get('nombre').touched">
+                            <span class="f-12">Maximo 20 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--Input apellidoP-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="apellidoP"style="font-size: 14px; color: cadetblue;">Primer apellido: </label>
+                            <input type="text" formControlName="apellidoP" placeholder="Apellido paterno" name="apellidoP" class="form-control">
+                        </div>
+                        <!--Alerta apellidop Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('apellidoP').hasError('required') && addForm.get('apellidoP').touched">
+                            <span class="f-12">Inserta apellido paterno del empleado</span>
+                        </div>
+                        <!--Alerta apellidoP MaxLength-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('apellidoP').hasError('maxlength') && addForm.get('apellidoP').touched">
+                            <span class="f-12">Maximo 20 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!--Input apellidoM-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="apellidoM"style="font-size: 14px; color: cadetblue;">Segundo apellido: </label>
+                            <input type="text" formControlName="apellidoM" placeholder="Apellido materno" name="apellidoM" class="form-control">
+                        </div>
+                        <!--Alerta apellidom Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('apellidoM').hasError('required') && addForm.get('apellidoM').touched">
+                            <span class="f-12">Inserta el apellido materno del empleado</span>
+                        </div>
+                        <!--Alerta apellidoM MaxLength-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('apellidoM').hasError('maxlength') && addForm.get('apellidoM').touched">
+                            <span class="f-12">Maximo 20 caracteres</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--Input Puesto-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="puesto"style="font-size: 14px; color: cadetblue;">Puesto: </label>
+                            <input type="text" formControlName="puesto" placeholder="Puesto del empleado" name="puesto" class="form-control">
+                        </div>
+                        <!--Alerta Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('puesto').hasError('required') && addForm.get('puesto').touched">
+                            <span class="f-12">Inserta el puesto del empleado</span>
+                        </div>
+                        <!--Alerta Puesto MaxLength-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('puesto').hasError('maxlength') && addForm.get('puesto').touched">
+                            <span class="f-12">Maximo 20 caracteres</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!--Input Fecha de nacimiento-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="fechaNac"style="font-size: 14px; color: cadetblue;">Fecha de nacimiento: </label>
+                            <input type="date" formControlName="fechaNac" placeholder="Fecha de nacimiento" name="fechaNac" class="form-control">
+                        </div>
+                        <!--Alerta fecha nac Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('fechaNac').hasError('required') && addForm.get('fechaNac').touched">
+                            <span class="f-12">Seleccione la fecha de nacimiento del empleado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--Input correo-->
+                        <div class="form-group">
+                            <label for="correo" style="font-size: 14px; color: cadetblue;">E-mail: </label>
+                            <input type="email" formControlName="correo" placeholder="Correo electronico" name="correo" class="form-control">
+                        </div>
+                        <!--Alerta correo Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('correo').hasError('required') && addForm.get('correo').touched">
+                            <span class="f-12">Ingrese el email del empleado</span>
+                        </div>
+                        <!--Alerta email-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('correo').hasError('email') && addForm.get('correo').touched">
+                            <span class="f-12">Ingrese un correo valido</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!--Input Salario-->
+                        <div class="form-group input-group-sm mb-3">
+                            <label for="salario" style="font-size: 14px; color: cadetblue;">Salario: </label>
+                            <input type="number" formControlName="salario" placeholder="Salario del trabajador" name="salario" class="form-control">
+                        </div>
+                        <!--Alerta salario Required-->
+                        <div class="alert alert-danger" *ngIf="addForm.get('salario').hasError('required') && addForm.get('salario').touched">
+                            <span class="f-12">Inserte el salario del empleado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group input-group-sm mb-3">
+                    <label for="contratista"style="font-size: 14px; color: cadetblue;">Contratista: </label>
+                    <select name="contratista" class="form-control" formControlName="contratista" placeholder="Seleccione una opcion">
+                        <option value="" disabled selected>Seleccione si es contratista</option>
+                        <option value="0">No</option>
+                        <option value="1">Si</option>
+                    </select>
+                </div>
+                <!--Alerta Required-->
+                <div class="alert alert-danger" *ngIf="addForm.get('contratista').hasError('required') && addForm.get('contratista').touched">
+                    <span class="f-12">Por favor selecciona si el empleado es contratista o no</span>
+                </div>
+                <div class="form-group input-group-sm mb-3" >
+                    <button class="btn btn-success btn-block" (click)="update()">Guardar empleado</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+

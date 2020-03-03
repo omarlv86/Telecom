@@ -1,0 +1,158 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12" >
+            <h3 class="text-center" style="margin: auto; padding: 10px;">Ver empleados</h3>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre (s)</th>
+                            <th>Apellido P</th>
+                            <th>Apellido M</th>
+                            <th>Fecha N.</th>
+                            <th>Puesto</th>
+                            <th>Salario</th>
+                            <th>Correo</th>
+                            <th>Contratista</th>
+                            <th colspan="2">Opciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <div *ngIf="dataExist == true; then thenBlock else elseBlock"></div>
+                      <ng-template #thenBlock>
+                        <tr *ngFor="let emp of employees | paginate: { itemsPerPage: pageSize, currentPage: pageActual}">
+                          <th><span class="font-weight-light">{{emp.id}}</span></th>
+                          <th><span class="font-weight-light">{{emp.nombre}}</span></th>
+                          <th><span class="font-weight-light">{{emp.apellidop}}</span></th>
+                          <th><span class="font-weight-light">{{emp.apellidom}}</span></th>
+                          <th><span class="font-weight-light">{{emp.fechanac}}</span></th>
+                          <th><span class="font-weight-light">{{emp.puesto}}</span></th>
+                          <th><span class="font-weight-light">{{emp.salario}}</span></th>
+                          <th><span class="font-weight-light">{{emp.correo}}</span></th>
+                          <th><span class="font-weight-light">{{emp.contratista ? 'Si': 'No'}}</span></th>
+                          <th><button class="btn btn-warning" (click)="edit(emp)">Edit</button></th>
+                          <th><button class="btn btn-danger" (click)="delete(emp)">Delete</button></th>
+                      </tr>
+                      </ng-template>
+                      <ng-template #elseBlock>
+                        <tr>
+                          <th colspan="11" class="bg-light" style="text-align: center;"><span class="font-weight-light ">No existen datos para mostrar</span></th>
+                        </tr>
+                      </ng-template>
+                      
+                    </tbody>
+                </table>
+            </div>
+            <div class="row">
+                <div class="col-md-4 text-center" >
+                    <pagination-controls (pageChange)="pageActual = $event" directionLinks="true"
+            autoHide="true"
+            responsive="true"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"></pagination-controls>
+                </div>
+                <div class="col-md-4 text-center" >
+                    <div class="input-group mb-3">
+                        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+                            <option [ngValue]="2">2 items por pagina</option>
+                            <option [ngValue]="4">4 items por pagina</option>
+                            <option [ngValue]="6">6 items por pagina</option>
+                            <option [ngValue]="10">10 items por pagina </option>
+                          </select>
+                      </div>
+                </div>
+                <div class="col-md-4 text-center" >
+                    El salario total de los trabajadores es: {{salarioT}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="salarioContratistas()">
+                Trabajadores contratistas
+              </button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Trabajadores contratistas</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+              <div class="row">
+                  <div class="col-md-12">
+                      <table class="table">
+                        <thead>
+                            <tr style="font-size: 14px;">
+                                <th>Id</th>
+                                <th>Nombre (s)</th>
+                                <th>Apellido P</th>
+                                <th>Apellido M</th>
+                                <th>Fecha N.</th>
+                                <th>Puesto</th>
+                                <th>Salario</th>
+                                <th>Correo</th>
+                                <th>Contratista</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let c of emps | paginate: { itemsPerPage: pageSizec, currentPage: pageActualc}" style="font-size:13px">
+                                <th><span class="font-weight-light">{{c.id}}</span></th>
+                                <th><span class="font-weight-light">{{c.nombre}}</span></th>
+                                <th><span class="font-weight-light">{{c.apellidop}}</span></th>
+                                <th><span class="font-weight-light">{{c.apellidom}}</span></th>
+                                <th><span class="font-weight-light">{{c.fechanac}}</span></th>
+                                <th><span class="font-weight-light">{{c.puesto}}</span></th>
+                                <th><span class="font-weight-light">{{c.salario}}</span></th>
+                                <th><span class="font-weight-light">{{c.correo}}</span></th>
+                                <th><span class="font-weight-light">{{c.contratista ? 'Si': 'No'}}</span></th>
+                            </tr>
+                        </tbody>
+                      </table>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 text-center" >
+                    <pagination-controls (pageChange)="pageActualc = $event" directionLinks="true"
+            autoHide="true"
+            responsive="true"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"></pagination-controls>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" style="width: auto" [(ngModel)]="pageSizec">
+                            <option [ngValue]="2">2 items por pagina</option>
+                            <option [ngValue]="4">4 items por pagina</option>
+                            <option [ngValue]="6">6 items por pagina</option>
+                            <option [ngValue]="10">10 items por pagina </option>
+                          </select>
+                      </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group mb-3">
+                        salario total: $ {{salarioTC}}
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
